@@ -1,0 +1,24 @@
+object Host "<%= @box[:fqdn] %>" {
+  import "generic-host"
+  address = "<%= @box[:ipaddress] %>"
+  vars.os = "<%= @box[:os].capitalize %>"
+  vars.managed_by = "chef"
+  vars.os_family = "<%= @box[:platform].capitalize %>"
+
+  # Notification group
+  vars.notification.mail.groups = <%= @box[:icinga2][:notification][:groups].to_a %>
+
+  <% if !@box[:icinga2][:client][:host_group][:short].nil? -%>
+  vars.box = "<%= @box[:icinga2][:client][:host_group][:short] %>"
+  <% end -%>
+
+}
+
+<% @box[:icinga2][:client][:nrpe][:default].each_key do |check| -%>
+object Service "<%= check.gsub("_", " ").split.map(&:capitalize)[1..-1].join(" ") %>" {
+  host_name = "<%= @box[:fqdn] %>"
+  check_command = "nrpe"
+  vars.nrpe_command = "<%= check %>"
+}
+<% end -%>
+

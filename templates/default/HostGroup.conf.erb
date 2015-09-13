@@ -1,0 +1,5 @@
+object HostGroup "<%= @name %>" {
+  display_name = "<%= @desc %>"
+  vars.managed_by = "chef"
+  assign where host.vars.box == "<%= @name %>"
+}

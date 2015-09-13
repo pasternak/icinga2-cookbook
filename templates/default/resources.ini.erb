@@ -1,0 +1,19 @@
+[icingaweb_db]
+type                = "db"
+db                  = "<%= @type %>"
+host                = "localhost"
+port                = "3306"
+dbname              = "icingaweb"
+username            = "<%= @info[:user] %>"
+password            = "<%= @info[:password] %>"
+prefix              = "icingaweb_"
+
+
+[icinga_ido]
+type                = "db"
+db                  = "<%= @type %>"
+host                = "localhost"
+port                = "3306"
+dbname              = "<%= @info[:db] %>"
+username            = "<%= @info[:user] %>"
+password            = "<%= @info[:password] %>"

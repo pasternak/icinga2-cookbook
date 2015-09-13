@@ -1,0 +1,5 @@
+object ServiceGroup "http" {
+  display_name = "HTTP Checks"
+
+  assign where match("http*", service.check_command)
+}

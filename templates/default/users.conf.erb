@@ -1,0 +1,12 @@
+<% @users.each_key do |user| %>
+
+object User "<%= user %>" {
+  import "generic-user"
+
+  display_name = "<%= @users[user][:display] %>"
+  groups = <%= @users[user][:groups].to_a.uniq %>
+  
+  email = "<%= @users[user][:mail] %>"
+}
+
+<% end %>
